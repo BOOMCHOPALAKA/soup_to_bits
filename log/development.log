@@ -1,0 +1,45 @@
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateSoups (20140912195429)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "soups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "featured" boolean, "category_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140912195429"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateCategories (20140912195457)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140912195457"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "soups" ("created_at", "featured", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2014-09-12 20:42:31.211491"], ["featured", "t"], ["name", "Tonkotsu"], ["updated_at", "2014-09-12 20:42:31.211491"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "soups" ("created_at", "name", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", "2014-09-12 20:44:04.669216"], ["name", "Tomato Bisque"], ["updated_at", "2014-09-12 20:44:04.669216"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mSoup Load (0.1ms)[0m  [1mSELECT  "soups".* FROM "soups"   ORDER BY "soups"."id" DESC LIMIT 1[0m
+  [1m[35mSoup Load (0.1ms)[0m  SELECT "soups".* FROM "soups"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "soups" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2014-09-12 20:45:27.088896"], ["name", "French Onion"], ["updated_at", "2014-09-12 20:45:27.088896"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mSoup Load (0.2ms)[0m  SELECT "soups".* FROM "soups"
+  [1m[36mSoup Load (0.1ms)[0m  [1mSELECT "soups".* FROM "soups"  WHERE "soups"."name" = 'Tonkotsu'[0m
+  [1m[35mSoup Load (0.2ms)[0m  SELECT "soups".* FROM "soups"  WHERE "soups"."name" = 'Tonkotsu'
+  [1m[36mSoup Load (0.1ms)[0m  [1mSELECT  "soups".* FROM "soups"  WHERE "soups"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSoup Load (0.1ms)[0m  SELECT  "soups".* FROM "soups"  WHERE "soups"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSoup Load (0.1ms)[0m  [1mSELECT  "soups".* FROM "soups"  WHERE "soups"."name" = 'Tomato Bisque' LIMIT 1[0m
+  [1m[35mSoup Load (0.1ms)[0m  SELECT  "soups".* FROM "soups"  WHERE "soups"."name" = 'Tonkotsu'  ORDER BY "soups"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "soups" SET "featured" = ?, "updated_at" = ? WHERE "soups"."id" = 1  [["featured", "f"], ["updated_at", "2014-09-12 20:51:33.125568"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "soups" SET "featured" = ?, "name" = ?, "updated_at" = ? WHERE "soups"."id" = 1[0m  [["featured", "t"], ["name", "Tonkotsu Ramen"], ["updated_at", "2014-09-12 20:51:56.060867"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mSoup Load (0.2ms)[0m  [1mSELECT  "soups".* FROM "soups"   ORDER BY "soups"."id" DESC LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "soups" WHERE "soups"."id" = ?[0m  [["id", 3]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36mSoup Load (0.3ms)[0m  [1mSELECT "soups".* FROM "soups"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "soups"
